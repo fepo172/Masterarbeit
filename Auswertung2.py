@@ -156,13 +156,13 @@ if df_raw is not None:
     stats_all = all_items_clean.describe().transpose().sort_values('mean', ascending=False)
     selection = stats_all.head(10).index.tolist() + stats_all.tail(10).index.tolist()
     
-    stats_all.to_csv(os.path.join(output_folder, "RQ1_Psych_Item_Statistiken.csv"), sep=';', encoding='utf-8-sig')
+    stats_all.to_csv(os.path.join(output_folder, "1_Psych_Item_Statistiken.csv"), sep=';', encoding='utf-8-sig')
     
     plt.figure(figsize=(12, 10))
     sns.boxplot(data=all_items_clean[selection], orient='h', palette="Greens")
-    plt.title("RQ1: Fragebogen Items Top 10 / Flop 10")
+    plt.title("1: Fragebogen Items Top 10 / Flop 10")
     plt.tight_layout()
-    plt.savefig(os.path.join(output_folder, "RQ1_Fragebogen_Items_Boxplot.png"))
+    plt.savefig(os.path.join(output_folder, "1_Fragebogen_Items_Boxplot.png"))
     plt.close()
 
     # Boxplot Strategien 
@@ -171,20 +171,20 @@ if df_raw is not None:
         plt.figure(figsize=(14, 7))
         sns.boxplot(data=df_psych[cols], palette="Greens")
         plt.xticks(rotation=45, ha='right')
-        plt.title(f"RQ2: Psychologische Strategien ({title_part})")
+        plt.title(f"2: Psychologische Strategien ({title_part})")
         plt.tight_layout()
-        plt.savefig(os.path.join(output_folder, f"RQ2_Psych_{title_part}_Boxplot.png"))
+        plt.savefig(os.path.join(output_folder, f"2_Psych_{title_part}_Boxplot.png"))
         plt.close()
 
     # Heatmap 
     corr_psych = df_psych[pe_cols_num + psych_cols].corr(method='spearman').loc[psych_cols, pe_cols_num]
-    corr_psych.to_csv(os.path.join(output_folder, "RQ3_Psych_Korrelationen.csv"), sep=';', encoding='utf-8-sig')
+    corr_psych.to_csv(os.path.join(output_folder, "3_Psych_Korrelationen.csv"), sep=';', encoding='utf-8-sig')
     
     plt.figure(figsize=(10, 8))
     sns.heatmap(corr_psych, annot=True, cmap="coolwarm", center=0, fmt=".2f")
-    plt.title("RQ3: Psych. Strategien vs. Erfahrung (Spearman)")
+    plt.title("3: Psych. Strategien vs. Erfahrung (Spearman)")
     plt.tight_layout()
-    plt.savefig(os.path.join(output_folder, "RQ3_Psych_Heatmap_Spearman.png"))
+    plt.savefig(os.path.join(output_folder, "3_Psych_Heatmap_Spearman.png"))
     plt.close()
 
     # =========================================================
@@ -196,20 +196,20 @@ if df_raw is not None:
     
     plt.figure(figsize=(12, 12))
     sns.boxplot(data=df_prog[sorted_prog], orient='h', palette="Greens_r")
-    plt.title("RQ1: Programmierstrategien (Boxplot)")
+    plt.title("1: Programmierstrategien (Boxplot)")
     plt.tight_layout()
-    plt.savefig(os.path.join(output_folder, "RQ1_Prog_Strategien_Boxplot.png"))
+    plt.savefig(os.path.join(output_folder, "1_Prog_Strategien_Boxplot.png"))
     plt.close()
 
     # Heatmap 
     corr_prog = df_prog[pe_cols_num + prog_cols].corr(method='spearman').loc[prog_cols, pe_cols_num]
-    corr_prog.to_csv(os.path.join(output_folder, "RQ3_Prog_Korrelationen.csv"), sep=';', encoding='utf-8-sig')
+    corr_prog.to_csv(os.path.join(output_folder, "3_Prog_Korrelationen.csv"), sep=';', encoding='utf-8-sig')
     
     plt.figure(figsize=(12, 12))
     sns.heatmap(corr_prog, annot=True, cmap="coolwarm", center=0, fmt=".2f")
-    plt.title("RQ3: Prog. Strategien vs. Erfahrung (Spearman)")
+    plt.title("3: Prog. Strategien vs. Erfahrung (Spearman)")
     plt.tight_layout()
-    plt.savefig(os.path.join(output_folder, "RQ3_Prog_Strategien_Heatmap_Spearman.png"))
+    plt.savefig(os.path.join(output_folder, "3_Prog_Strategien_Heatmap_Spearman.png"))
     plt.close()
 
     # =========================================================
@@ -242,4 +242,5 @@ if df_raw is not None:
 
     print(f"\nFERTIG! Alle Analysen, Diagramme, Excels und CSVs in: {output_folder}")
 else:
+
     print("Fehler: Keine Daten gefunden.")
